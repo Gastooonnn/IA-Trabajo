@@ -1,13 +1,554 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Sonrisa Uruguaya | Clínica Dental</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f4fbff;
+            color: #183b56;
+        }
+
+        header {
+            background: white;
+            padding: 20px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #1597d4;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #183b56;
+            margin-left: 25px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: #1597d4;
+        }
+
+        .hero {
+            min-height: 500px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 50px 20px;
+            background: linear-gradient(135deg, #dff6ff, #ffffff);
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            color: #087db5;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 30px;
+            color: #527184;
+        }
+
+        .hero-button {
+            display: inline-block;
+            background: #1597d4;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .hero-button:hover {
+            background: #087db5;
+            transform: scale(1.05);
+        }
+
+        section {
+            padding: 70px 8%;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 32px;
+            color: #087db5;
+        }
+
+        .services {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 30px 20px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-7px);
+        }
+
+        .card .icon {
+            font-size: 45px;
+            margin-bottom: 15px;
+        }
+
+        .card h3 {
+            margin-bottom: 10px;
+            color: #087db5;
+        }
+
+        .schedule {
+            background: #e5f7ff;
+        }
+
+        .schedule-box {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .schedule-box p {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .schedule-box p:last-child {
+            border-bottom: none;
+        }
+
+        .emergency {
+            text-align: center;
+        }
+
+        .emergency-box {
+            max-width: 700px;
+            margin: auto;
+            background: #fff0f0;
+            border: 2px solid #ff4d4d;
+            padding: 30px;
+            border-radius: 15px;
+        }
+
+        .emergency-box h3 {
+            color: #e22b2b;
+            margin-bottom: 15px;
+        }
+
+        footer {
+            background: #183b56;
+            color: white;
+            text-align: center;
+            padding: 25px;
+        }
+
+        /* BOTÓN HELP */
+        .help-button {
+            position: fixed;
+            right: 25px;
+            bottom: 25px;
+            width: 75px;
+            height: 75px;
+            border-radius: 50%;
+            border: none;
+            background: #e53935;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(229,57,53,0.5);
+            z-index: 100;
+            transition: 0.3s;
+        }
+
+        .help-button:hover {
+            transform: scale(1.1);
+            background: #c62828;
+        }
+
+        /* VENTANA HELP */
+        .help-modal {
+            display: none;
+            position: fixed;
+            z-index: 99;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.55);
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .help-content {
+            background: white;
+            max-width: 500px;
+            width: 100%;
+            padding: 35px;
+            border-radius: 20px;
+            text-align: center;
+            position: relative;
+            animation: aparecer 0.3s ease;
+        }
+
+        @keyframes aparecer {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .help-content h2 {
+            color: #e53935;
+            margin-bottom: 15px;
+        }
+
+        .help-content p {
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .close {
+            position: absolute;
+            right: 18px;
+            top: 12px;
+            font-size: 30px;
+            cursor: pointer;
+            color: #555;
+        }
+
+        .guard-button {
+            display: inline-block;
+            background: #e53935;
+            color: white;
+            padding: 13px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        @media (max-width: 800px) {
+            .services {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            nav {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 38px;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .services {
+                grid-template-columns: 1fr;
+            }
+
+            .help-button {
+                width: 65px;
+                height: 65px;
+                right: 18px;
+                bottom: 18px;
+            }
+        }
+    </style>
 </head>
+
 <body>
+
+    <header>
+        <div class="logo">🦷 Sonrisa Uruguaya</div>
+
+        <nav>
+            <a href="#inicio">Inicio</a>
+            <a href="#servicios">Servicios</a>
+            <a href="#horarios">Horarios</a>
+            <a href="#contacto">Contacto</a>
+        </nav>
+    </header>
+
+    <main>
+
+        <section class="hero" id="inicio">
+            <div>
+                <h1>Tu sonrisa, nuestra prioridad</h1>
+
+                <p>
+                    Clínica dental en Montevideo dedicada al cuidado
+                    y bienestar de tu sonrisa.
+                </p>
+
+                <a href="#servicios" class="hero-button">
+                    Ver servicios
+                </a>
+            </div>
+        </section>
+
+        <section id="servicios">
+
+            <h2 class="section-title">
+                Nuestros servicios
+            </h2>
+
+            <div class="services">
+
+                <div class="card">
+                    <div class="icon">🪥</div>
+                    <h3>Limpieza dental</h3>
+                    <p>
+                        Cuidado y limpieza profesional para mantener
+                        tus dientes saludables.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <div class="icon">✨</div>
+                    <h3>Blanqueamiento</h3>
+                    <p>
+                        Tratamientos para mejorar el aspecto y
+                        luminosidad de tu sonrisa.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <div class="icon">😁</div>
+                    <h3>Ortodoncia</h3>
+                    <p>
+                        Tratamientos para mejorar la posición
+                        de los dientes.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <div class="icon">🚨</div>
+                    <h3>Urgencias</h3>
+                    <p>
+                        Atención de urgencias todos los días,
+                        incluso fuera de horario.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="schedule" id="horarios">
+
+            <h2 class="section-title">
+                Horarios de atención
+            </h2>
+
+            <div class="schedule-box">
+
+                <p>
+                    <strong>Lunes a viernes:</strong>
+                    9:00 a 18:00
+                </p>
+
+                <p>
+                    <strong>Sábados:</strong>
+                    9:00 a 13:00
+                </p>
+
+                <p>
+                    <strong>Urgencias:</strong>
+                    Todos los días
+                </p>
+
+                <p>
+                    <strong>Fuera de horario:</strong>
+                    Llamar al número de guardia
+                </p>
+
+            </div>
+        </section>
+
+        <section class="emergency" id="contacto">
+
+            <h2 class="section-title">
+                Atención de urgencias
+            </h2>
+
+            <div class="emergency-box">
+
+                <h3>🚨 ¿Tenés una urgencia dental?</h3>
+
+                <p>
+                    Las urgencias se atienden todos los días,
+                    incluso fuera del horario habitual.
+                    Para recibir atención, comunicate con el
+                    número de guardia.
+                </p>
+
+                <p>
+                    <strong>Importante:</strong>
+                    No se atienden urgencias pediátricas
+                    de menores de 12 años.
+                </p>
+
+                <p>
+                    En esos casos, se deriva al Hospital Pediátrico
+                    más cercano.
+                </p>
+
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>
+            © 2026 Sonrisa Uruguaya - Clínica Dental
+        </p>
+
+        <p>
+            Montevideo, Uruguay
+        </p>
+    </footer>
+
+
+    <!-- BOTÓN HELP -->
+    <button class="help-button" onclick="abrirHelp()">
+        HELP
+    </button>
+
+
+    <!-- VENTANA HELP -->
+    <div class="help-modal" id="helpModal">
+
+        <div class="help-content">
+
+            <span class="close" onclick="cerrarHelp()">
+                &times;
+            </span>
+
+            <h2>🚨 AYUDA / URGENCIAS</h2>
+
+            <p>
+                Si tenés una urgencia dental, podés comunicarte
+                con nuestro número de guardia.
+            </p>
+
+            <p>
+                <strong>
+                    Las urgencias se atienden todos los días,
+                    incluso fuera del horario habitual.
+                </strong>
+            </p>
+
+            <p>
+                ⚠️ Los menores de 12 años no son atendidos
+                por urgencias pediátricas. En esos casos,
+                se deriva al Hospital Pediátrico más cercano.
+            </p>
+
+            <a href="tel:+59800000000" class="guard-button">
+                📞 Llamar al número de guardia
+            </a>
+
+        </div>
+    </div>
+
+
+    <!-- JAVASCRIPT DEL BOTÓN HELP -->
     <script>
-    (function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="YtAj63OHb8Uyeo_gXDVxC";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
+
+        function abrirHelp() {
+            document.getElementById("helpModal").style.display = "flex";
+        }
+
+        function cerrarHelp() {
+            document.getElementById("helpModal").style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById("helpModal");
+
+            if (event.target === modal) {
+                cerrarHelp();
+            }
+        }
+
     </script>
+
+
+    <!-- CHATBASE -->
+    <script>
+    (function(){
+        if(!window.chatbase || window.chatbase("getState") !== "initialized"){
+            window.chatbase = (...arguments) => {
+                if(!window.chatbase.q){
+                    window.chatbase.q = [];
+                }
+
+                window.chatbase.q.push(arguments);
+            };
+
+            window.chatbase = new Proxy(window.chatbase,{
+                get(target,prop){
+                    if(prop === "q"){
+                        return target.q;
+                    }
+
+                    return (...args) => target(prop,...args);
+                }
+            });
+        }
+
+        const onLoad = function(){
+            const script = document.createElement("script");
+
+            script.src = "https://www.chatbase.co/embed.min.js";
+            script.id = "YtAj63OHb8Uyeo_gXDVxC";
+            script.domain = "www.chatbase.co";
+
+            document.body.appendChild(script);
+        };
+
+        if(document.readyState === "complete"){
+            onLoad();
+        } else {
+            window.addEventListener("load", onLoad);
+        }
+    })();
+    </script>
+
 </body>
 </html>
